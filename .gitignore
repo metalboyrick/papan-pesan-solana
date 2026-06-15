@@ -1,0 +1,15 @@
+# Anchor / Rust
+.anchor
+target
+**/*.rs.bk
+
+# Node
+node_modules
+.DS_Store
+
+# Keypairs — NEVER commit real wallets
+*.pem
+test-ledger
+
+# The program keypair Anchor generates lives in target/deploy and is gitignored
+# via the target/ rule above. Back it up separately if you want a stable id.

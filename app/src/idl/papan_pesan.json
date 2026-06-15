@@ -1,0 +1,49 @@
+{
+  "_comment": "PLACEHOLDER IDL. After `anchor build && anchor keys sync && anchor build`, overwrite this file with the generated target/idl/papan_pesan.json (and update the `address` below to your synced program id).",
+  "address": "PapanPesa111111111111111111111111111111111",
+  "metadata": {
+    "name": "papan_pesan",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Papan Pesan — on-chain message board (teaching boilerplate)"
+  },
+  "instructions": [
+    {
+      "name": "store_data",
+      "discriminator": [0, 0, 0, 0, 0, 0, 0, 0],
+      "accounts": [
+        {
+          "name": "papan",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              { "kind": "const", "value": [112, 97, 112, 97, 110] },
+              { "kind": "account", "path": "user" }
+            ]
+          }
+        },
+        { "name": "user", "writable": true, "signer": true },
+        { "name": "system_program", "address": "11111111111111111111111111111111" }
+      ],
+      "args": [{ "name": "pesan", "type": "string" }]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Papan",
+      "discriminator": [0, 0, 0, 0, 0, 0, 0, 0]
+    }
+  ],
+  "types": [
+    {
+      "name": "Papan",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          { "name": "penulis", "type": "pubkey" },
+          { "name": "pesan", "type": "string" }
+        ]
+      }
+    }
+  ]
+}

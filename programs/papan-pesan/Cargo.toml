@@ -1,0 +1,22 @@
+[package]
+name = "papan-pesan"
+version = "0.1.0"
+description = "Papan Pesan — on-chain message board (teaching boilerplate)"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "papan_pesan"
+
+[features]
+default = []
+cpi = ["no-entrypoint"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+idl-build = ["anchor-lang/idl-build"]
+
+[dependencies]
+# NOTE: `init_if_needed` in the program REQUIRES the "init-if-needed" feature here.
+# Without it, `anchor build` fails with a clear "init_if_needed requires feature" error.
+anchor-lang = { version = "0.31.1", features = ["init-if-needed"] }

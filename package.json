@@ -1,0 +1,23 @@
+{
+  "name": "papan-pesan",
+  "version": "0.1.0",
+  "description": "Anchor program tests for Papan Pesan (on-chain message board)",
+  "license": "MIT",
+  "scripts": {
+    "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
+    "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.31.1"
+  },
+  "devDependencies": {
+    "@types/bn.js": "^5.1.5",
+    "@types/chai": "^4.3.16",
+    "@types/mocha": "^10.0.7",
+    "chai": "^4.5.0",
+    "mocha": "^10.7.3",
+    "prettier": "^3.3.3",
+    "ts-mocha": "^10.0.0",
+    "typescript": "^5.5.4"
+  }
+}
