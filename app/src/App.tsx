@@ -52,10 +52,10 @@ export default function App() {
     try {
       setStatus("Mengirim transaksi...");
 
-      // TODO (live): ganti baris throw ini dengan pemanggilan .storeData(...).
-      throw new Error(
-        "storeData belum diisi — lihat SOLUSI di komentar / solution/App.tsx",
-      );
+      await program.methods
+        .storeData(input)
+        .accountsPartial({ user: wallet.publicKey })
+        .rpc();
 
       setStatus("Tersimpan! Mengambil data...");
       await getData();
@@ -79,10 +79,8 @@ export default function App() {
   async function getData() {
     if (!program || !papanPda) return;
     try {
-      // TODO (live): ganti baris throw ini dengan fetch akun di atas.
-      throw new Error(
-        "getData belum diisi — lihat SOLUSI di komentar / solution/App.tsx",
-      );
+      const akun = await program.account.papan.fetch(papanPda);
+      setPesan(akun.pesan as string);
     } catch (e) {
       console.error(e);
       setPesan(null);

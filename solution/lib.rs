@@ -27,7 +27,7 @@ pub struct StoreData<'info> {
     #[account(
         init_if_needed,
         payer = user,
-        space = 8 + 32 + 4 + 200,
+        space = 8 + Papan::INIT_SPACE,
         seeds = [b"papan", user.key().as_ref()],
         bump
     )]

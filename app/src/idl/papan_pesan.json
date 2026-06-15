@@ -1,6 +1,5 @@
 {
-  "_comment": "PLACEHOLDER IDL. After `anchor build && anchor keys sync && anchor build`, overwrite this file with the generated target/idl/papan_pesan.json (and update the `address` below to your synced program id).",
-  "address": "PapanPesa111111111111111111111111111111111",
+  "address": "6GwBt5Cv4zqQwyNnQP9oCrd6D9RuU4quW8bgMNsLRxkP",
   "metadata": {
     "name": "papan_pesan",
     "version": "0.1.0",
@@ -10,38 +9,69 @@
   "instructions": [
     {
       "name": "store_data",
-      "discriminator": [0, 0, 0, 0, 0, 0, 0, 0],
+      "docs": [
+        "Menyimpan pesan ke akun PDA milik si pengirim.",
+        "",
+        "`penulis` = siapa yang menulis (wallet pengirim)",
+        "`pesan`   = teks pesannya (maks. 200 byte — lihat catatan space di bawah)"
+      ],
+      "discriminator": [62, 196, 58, 213, 155, 62, 207, 186],
       "accounts": [
         {
           "name": "papan",
           "writable": true,
           "pda": {
             "seeds": [
-              { "kind": "const", "value": [112, 97, 112, 97, 110] },
-              { "kind": "account", "path": "user" }
+              {
+                "kind": "const",
+                "value": [112, 97, 112, 97, 110]
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              }
             ]
           }
         },
-        { "name": "user", "writable": true, "signer": true },
-        { "name": "system_program", "address": "11111111111111111111111111111111" }
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
       ],
-      "args": [{ "name": "pesan", "type": "string" }]
+      "args": [
+        {
+          "name": "pesan",
+          "type": "string"
+        }
+      ]
     }
   ],
   "accounts": [
     {
       "name": "Papan",
-      "discriminator": [0, 0, 0, 0, 0, 0, 0, 0]
+      "discriminator": [83, 146, 12, 13, 154, 126, 147, 30]
     }
   ],
   "types": [
     {
       "name": "Papan",
+      "docs": ["Struktur data yang disimpan di dalam akun PDA `papan`."],
       "type": {
         "kind": "struct",
         "fields": [
-          { "name": "penulis", "type": "pubkey" },
-          { "name": "pesan", "type": "string" }
+          {
+            "name": "penulis",
+            "type": "pubkey"
+          },
+          {
+            "name": "pesan",
+            "type": "string"
+          }
         ]
       }
     }

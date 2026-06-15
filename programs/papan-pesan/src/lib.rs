@@ -1,5 +1,7 @@
 use anchor_lang::prelude::*;
 
+const MAX_MESSAGE_LEN: usize = 280;
+
 // `anchor keys sync` rewrites this value (and the one in Anchor.toml) to match
 // the deployed keypair. Run `anchor build` once first so the keypair exists.
 declare_id!("6GwBt5Cv4zqQwyNnQP9oCrd6D9RuU4quW8bgMNsLRxkP");
@@ -18,18 +20,18 @@ pub mod papan_pesan {
         // Ambil akun papan dari context, lalu tulis penulis + pesan ke sana.
         //
         // ---- SOLUSI (ketik ini saat live coding) ----
-        // let papan = &mut ctx.accounts.papan;
-        // papan.penulis = ctx.accounts.user.key();
-        // papan.pesan = pesan;
-        // msg!("Pesan tersimpan: {}", papan.pesan);
-        // Ok(())
+        let papan = &mut ctx.accounts.papan;
+        papan.penulis = ctx.accounts.user.key();
+        papan.pesan = pesan;
+        msg!("Pesan tersimpan: {}", papan.pesan);
+        Ok(())
         // ----------------------------------------------
         //
         // Sengaja dibuat error agar `anchor build` mengingatkan kalau badan
         // fungsi belum diisi. Hapus baris di bawah setelah mengetik solusi.
         // ================================================================
-        let _ = (ctx, pesan);
-        todo!("store_data: isi badan fungsi (lihat SOLUSI di komentar atau di solution/lib.rs)")
+        // let _ = (ctx, pesan);
+        // todo!("store_data: isi badan fungsi (lihat SOLUSI di komentar atau di solution/lib.rs)")
     }
 
     // CATATAN: TIDAK ADA `get_data` on-chain.
@@ -50,8 +52,8 @@ pub struct StoreData<'info> {
     #[account(
         init_if_needed,
         payer = user,
-        // space = 8 (discriminator) + 32 (penulis: Pubkey) + 4 (panjang String) + 200 (isi pesan)
-        space = 8 + 32 + 4 + 200,
+        // space = 8 (discriminator) + 32 (penulis: Pubkey) + 4 (panjang String) + MAX_MESSAGE_LEN (isi pesan)
+        space = 8 + 32 + 4 + MAX_MESSAGE_LEN,
         seeds = [b"papan", user.key().as_ref()],
         bump
     )]
@@ -67,5 +69,5 @@ pub struct StoreData<'info> {
 #[account]
 pub struct Papan {
     pub penulis: Pubkey, // 32 byte
-    pub pesan: String,   // 4 byte panjang + maks 200 byte isi
+    pub pesan: String,   // 4 byte panjang + maks MAX_MESSAGE_LEN byte isi
 }
