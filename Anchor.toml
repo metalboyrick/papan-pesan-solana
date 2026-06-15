@@ -6,7 +6,7 @@ resolution = true
 skip-lint = false
 
 [programs.devnet]
-papan_pesan = "PapanPesa111111111111111111111111111111111"
+papan_pesan = "6GwBt5Cv4zqQwyNnQP9oCrd6D9RuU4quW8bgMNsLRxkP"
 
 [registry]
 url = "https://api.apr.dev"

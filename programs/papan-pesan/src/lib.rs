@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 
 // `anchor keys sync` rewrites this value (and the one in Anchor.toml) to match
 // the deployed keypair. Run `anchor build` once first so the keypair exists.
-declare_id!("PapanPesa111111111111111111111111111111111");
+declare_id!("6GwBt5Cv4zqQwyNnQP9oCrd6D9RuU4quW8bgMNsLRxkP");
 
 #[program]
 pub mod papan_pesan {
