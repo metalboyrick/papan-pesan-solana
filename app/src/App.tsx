@@ -28,7 +28,7 @@ export default function App() {
     if (!program || !wallet) return null;
     const [pda] = PublicKey.findProgramAddressSync(
       [Buffer.from("papan"), wallet.publicKey.toBuffer()],
-      program.programId
+      program.programId,
     );
     return pda;
   }, [program, wallet]);
@@ -40,20 +40,22 @@ export default function App() {
   // Ingat: pakai .accountsPartial({ user }) — BUKAN .accounts (typing ketat
   // di Anchor 0.30+).
   //
-  // ---- SOLUSI (ketik ini saat live coding) ----
-  // await program.methods
-  //   .storeData(input)
-  //   .accountsPartial({ user: wallet.publicKey })
-  //   .rpc();
-  // ----------------------------------------------
+  // ---- SOLUSI (ketik ini DI DALAM storeData, menggantikan throw) ----
+  //   await program.methods
+  //     .storeData(input)
+  //     .accountsPartial({ user: wallet.publicKey })
+  //     .rpc();
+  // ------------------------------------------------------------------
   // ==========================================================================
   async function storeData() {
     if (!program || !wallet) return;
     try {
       setStatus("Mengirim transaksi...");
 
-      // TODO (live): ganti baris di bawah dengan pemanggilan .storeData(...) di atas.
-      throw new Error("storeData belum diisi — lihat SOLUSI di komentar / solution/App.tsx");
+      // TODO (live): ganti baris throw ini dengan pemanggilan .storeData(...).
+      throw new Error(
+        "storeData belum diisi — lihat SOLUSI di komentar / solution/App.tsx",
+      );
 
       setStatus("Tersimpan! Mengambil data...");
       await getData();
@@ -68,17 +70,19 @@ export default function App() {
   // --------------------------------------------------------------------------
   // Ambil akun di alamat `papanPda` lalu tampilkan field `pesan`.
   //
-  // ---- SOLUSI (ketik ini saat live coding) ----
-  // const akun = await program.account.papan.fetch(papanPda);
-  // setPesan(akun.pesan as string);
-  // ----------------------------------------------
+  // ---- SOLUSI (ketik ini DI DALAM getData, menggantikan throw) ----
+  //   const akun = await program.account.papan.fetch(papanPda);
+  //   setPesan(akun.pesan as string);
+  // -----------------------------------------------------------------
   // CATATAN: jika akun belum pernah dibuat, fetch akan throw — itu wajar.
   // ==========================================================================
   async function getData() {
     if (!program || !papanPda) return;
     try {
-      // TODO (live): ganti baris di bawah dengan fetch akun di atas.
-      throw new Error("getData belum diisi — lihat SOLUSI di komentar / solution/App.tsx");
+      // TODO (live): ganti baris throw ini dengan fetch akun di atas.
+      throw new Error(
+        "getData belum diisi — lihat SOLUSI di komentar / solution/App.tsx",
+      );
     } catch (e) {
       console.error(e);
       setPesan(null);
@@ -130,13 +134,45 @@ export default function App() {
 
 // Inline styles agar tidak perlu file CSS tambahan — fokus ke logika Solana.
 const styles: Record<string, React.CSSProperties> = {
-  main: { maxWidth: 560, margin: "48px auto", fontFamily: "system-ui, sans-serif", padding: "0 16px" },
+  main: {
+    maxWidth: 560,
+    margin: "48px auto",
+    fontFamily: "system-ui, sans-serif",
+    padding: "0 16px",
+  },
   sub: { color: "#666", marginTop: -8 },
-  card: { marginTop: 24, padding: 20, border: "1px solid #e3e3e3", borderRadius: 12 },
+  card: {
+    marginTop: 24,
+    padding: 20,
+    border: "1px solid #e3e3e3",
+    borderRadius: 12,
+  },
   row: { display: "flex", gap: 8 },
-  input: { flex: 1, padding: "10px 12px", borderRadius: 8, border: "1px solid #ccc", fontSize: 15 },
-  btn: { padding: "10px 18px", borderRadius: 8, border: "none", background: "#512da8", color: "#fff", cursor: "pointer", fontSize: 15 },
-  btnGhost: { marginTop: 12, padding: "8px 14px", borderRadius: 8, border: "1px solid #512da8", background: "#fff", color: "#512da8", cursor: "pointer" },
+  input: {
+    flex: 1,
+    padding: "10px 12px",
+    borderRadius: 8,
+    border: "1px solid #ccc",
+    fontSize: 15,
+  },
+  btn: {
+    padding: "10px 18px",
+    borderRadius: 8,
+    border: "none",
+    background: "#512da8",
+    color: "#fff",
+    cursor: "pointer",
+    fontSize: 15,
+  },
+  btnGhost: {
+    marginTop: 12,
+    padding: "8px 14px",
+    borderRadius: 8,
+    border: "1px solid #512da8",
+    background: "#fff",
+    color: "#512da8",
+    cursor: "pointer",
+  },
   out: { marginTop: 16, padding: 12, background: "#f6f4fc", borderRadius: 8 },
   status: { marginTop: 12, color: "#444", fontSize: 14 },
   hint: { marginTop: 16, color: "#888", fontSize: 13, wordBreak: "break-all" },
